@@ -5,6 +5,8 @@
     <Description>FluentEmail sender for https://rapidapi.com/lkyzmanov-1rYfRuWv8CS/api/http2smtp/</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/be4i/FluentEmail.Http2smtp</RepositoryUrl>
+    <Authors>Lachezar Kuzmanov</Authors>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

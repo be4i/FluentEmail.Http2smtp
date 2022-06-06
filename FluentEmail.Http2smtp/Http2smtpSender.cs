@@ -4,6 +4,8 @@ using FluentEmail.Core.Models;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +21,8 @@ namespace FluentEmail.Http2smtp
         {
             _httpClient = new HttpClient
             {
-                BaseAddress = BaseAddress
+                BaseAddress = BaseAddress,
+                
             };
 
             _httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Key", apiKey);
@@ -36,7 +39,7 @@ namespace FluentEmail.Http2smtp
         public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
             var request = new HttpSendRequest(email.Data, _smtpOptions);
-            var json = JsonContent.Create(request);
+            var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
             var httpResponse = await _httpClient.PostAsync("send", json, token.GetValueOrDefault());
             var result = new SendResponse();
 
